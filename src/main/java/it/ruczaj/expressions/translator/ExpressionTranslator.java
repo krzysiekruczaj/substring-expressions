@@ -1,4 +1,4 @@
-package it.ruczaj.expressions;
+package it.ruczaj.expressions.translator;
 
 import it.ruczaj.expressions.characters.Character;
 

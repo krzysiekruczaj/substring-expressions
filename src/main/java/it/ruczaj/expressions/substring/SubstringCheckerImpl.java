@@ -26,11 +26,14 @@ public class SubstringCheckerImpl implements SubstringChecker {
 			Character[] translatedCharacters,
 			int translatedCharactersCount) {
 		char[] inputCharacters = inputString.toCharArray();
-		if (inputCharacters.length == translatedCharactersCount) {
+		if (isExpressionWithSameLengthAsProvidedString(translatedCharactersCount, inputCharacters)) {
 			return validateSubstringWithEqualLength(translatedCharacters, inputCharacters);
-
 		}
 		return validateSubstringWithDifferentLength(translatedCharacters, inputCharacters);
+	}
+
+	private boolean isExpressionWithSameLengthAsProvidedString(int translatedCharactersCount, char[] inputCharacters) {
+		return inputCharacters.length == translatedCharactersCount;
 	}
 
 	private boolean validateSubstringWithDifferentLength(Character[] translatedCharacters, char[] inputCharacters) {
@@ -38,11 +41,14 @@ public class SubstringCheckerImpl implements SubstringChecker {
 			char currentCharacter = inputCharacters[currentIndex];
 			Character translatedCharacter = translatedCharacters[0];
 			logger.debug("Checking: [{}] against [{}]", currentCharacter, translatedCharacter);
-
 			if (isSameCharacter(translatedCharacter, currentCharacter)) {
 				logger.debug("Matched: [{}] against [{}]", currentCharacter, translatedCharacter);
-				if (allSubsequentCharactersAreMatching(inputCharacters, translatedCharacters, currentIndex)) {
-					return true;
+				if (isAmountOfSubsequentCharactersEnough(inputCharacters, translatedCharacters, currentIndex)) {
+					if (allSubsequentCharactersAreMatching(inputCharacters, translatedCharacters, currentIndex)) {
+						return true;
+					}
+				} else {
+					return false;
 				}
 			}
 		}
@@ -53,29 +59,35 @@ public class SubstringCheckerImpl implements SubstringChecker {
 			char[] inputCharacters,
 			Character[] translatedCharacters,
 			int currentIndex) {
-		if (inputCharacters.length - (currentIndex + 1) >= translatedCharacters.length - 1) {
-			for (int subsequentIndex = 1; subsequentIndex < translatedCharacters.length; subsequentIndex++) {
-				char subsequentCharacter = inputCharacters[currentIndex + subsequentIndex];
-				Character translatedCharacter = translatedCharacters[subsequentIndex];
-				if (isNotSameCharacter(translatedCharacter, subsequentCharacter)) {
-					logger.debug("Not matched subsequent: [{}] against [{}]", subsequentCharacter, translatedCharacter);
-					return false;
-				}
-				logger.debug("Matched subsequent: [{}] against [{}]", subsequentCharacter, translatedCharacter);
+		for (int subsequentIndex = 1; subsequentIndex < translatedCharacters.length; subsequentIndex++) {
+			char subsequentCharacter = inputCharacters[currentIndex + subsequentIndex];
+			Character translatedCharacter = translatedCharacters[subsequentIndex];
+			if (isNotSameCharacter(translatedCharacter, subsequentCharacter)) {
+				logger.debug("Not matched subsequent: [{}] against [{}]", subsequentCharacter, translatedCharacter);
+				return false;
 			}
-			return true;
+			logger.debug("Matched subsequent: [{}] against [{}]", subsequentCharacter, translatedCharacter);
 		}
-		return false;
+		return true;
+	}
+
+	private boolean isAmountOfSubsequentCharactersEnough(
+			char[] inputCharacters,
+			Character[] translatedCharacters,
+			int currentIndex) {
+		return inputCharacters.length - (currentIndex + 1) >= translatedCharacters.length - 1;
 	}
 
 	private boolean validateSubstringWithEqualLength(Character[] translatedCharacters, char[] inputCharacters) {
 		for (int currentIndex = 0; currentIndex < inputCharacters.length; currentIndex++) {
 			char currentCharacter = inputCharacters[currentIndex];
-			logger.debug("Checking: {}", currentCharacter);
 			Character translatedCharacter = translatedCharacters[currentIndex];
+			logger.debug("Checking: [{}] against [{}]", currentCharacter, translatedCharacter);
 			if (isNotSameCharacter(translatedCharacter, currentCharacter)) {
+				logger.debug("Not matched: [{}] against [{}]", currentCharacter, translatedCharacter);
 				return false;
 			}
+			logger.debug("Matched: [{}] against [{}]", currentCharacter, translatedCharacter);
 		}
 		return true;
 	}

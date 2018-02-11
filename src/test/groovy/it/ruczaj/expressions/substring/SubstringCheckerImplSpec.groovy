@@ -6,12 +6,10 @@ import spock.lang.Unroll
 
 class SubstringCheckerImplSpec extends Specification {
 
-	def tested = new SubstringCheckerImpl()
-
 	@Unroll
 	def "should return true when checking if [#inputString] contains as substring translated [#comparedExpression]"() {
 		expect:
-		tested.isSubstring(inputString, comparedExpression)
+		new SubstringCheckerImpl(inputString, comparedExpression).isSubstring()
 
 		where:
 		inputString                    | comparedExpression
@@ -31,7 +29,7 @@ class SubstringCheckerImplSpec extends Specification {
 	@Unroll
 	def "should return false when checking if [#inputString] contains as substring translated [#comparedExpression]"() {
 		expect:
-		!tested.isSubstring(inputString, comparedExpression)
+		!new SubstringCheckerImpl(inputString, comparedExpression).isSubstring()
 
 		where:
 		inputString                                              | comparedExpression

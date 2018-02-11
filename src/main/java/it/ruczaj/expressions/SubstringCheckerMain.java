@@ -10,7 +10,6 @@ import java.util.List;
 
 public class SubstringCheckerMain {
 	private final ExpressionTranslator expressionTranslator = new ExpressionTranslatorImpl();
-	private final SubstringChecker substringChecker = new SubstringCheckerImpl();
 
 	public static void main(String[] args) {
 		SubstringCheckerMain logicExecutor = new SubstringCheckerMain();
@@ -23,7 +22,8 @@ public class SubstringCheckerMain {
 			final String comparedExpression = args[1];
 
 			List<Character> translatedCharacters = expressionTranslator.translate(comparedExpression);
-			if (substringChecker.isSubstring(inputString, translatedCharacters)) {
+			SubstringChecker substringChecker = new SubstringCheckerImpl(inputString, translatedCharacters);
+			if (substringChecker.isSubstring()) {
 				return buildSubstringMessage(inputString, comparedExpression);
 			} else {
 				return buildNotSubstringMessage(inputString, comparedExpression);

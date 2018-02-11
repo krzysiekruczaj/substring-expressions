@@ -9,7 +9,7 @@ class SubstringCheckerMainSpec extends Specification {
 	@Unroll
 	def "should return failure message when invalid arguments were passed #arguments"() {
 		when:
-		def result = tested.compare(arguments as String[])
+		def result = tested.compareInputWithExpression(arguments as String[])
 
 		then:
 		result == "Pass two parameters - [inputString] [comparedExpression]!"
@@ -24,7 +24,7 @@ class SubstringCheckerMainSpec extends Specification {
 	@Unroll
 	def "should return that [#comparedExpression] is substring of [#inputString]"() {
 		expect:
-		tested.compare([inputString, comparedExpression] as String[]) == "Provided input expression [$comparedExpression] is substring of [$inputString]!"
+		tested.compareInputWithExpression([inputString, comparedExpression] as String[]) == "Provided input expression [$comparedExpression] is substring of [$inputString]!"
 
 		where:
 		inputString    | comparedExpression
@@ -40,7 +40,7 @@ class SubstringCheckerMainSpec extends Specification {
 	@Unroll
 	def "should return that [#comparedExpression] is not substring of [#inputString]"() {
 		expect:
-		tested.compare([inputString, comparedExpression] as String[]) == "Provided input expression [$comparedExpression] is not substring of [$inputString]!"
+		tested.compareInputWithExpression([inputString, comparedExpression] as String[]) == "Provided input expression [$comparedExpression] is not substring of [$inputString]!"
 
 		where:
 		inputString                                              | comparedExpression

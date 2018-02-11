@@ -14,10 +14,10 @@ public class SubstringCheckerMain {
 
 	public static void main(String[] args) {
 		SubstringCheckerMain logicExecutor = new SubstringCheckerMain();
-		logicExecutor.compare(args);
+		System.out.println(logicExecutor.compareInputWithExpression(args));
 	}
 
-	public String compare(String[] args) {
+	public String compareInputWithExpression(String[] args) {
 		if (hasValidArgumentsLength(args)) {
 			final String inputString = args[0];
 			final String comparedExpression = args[1];

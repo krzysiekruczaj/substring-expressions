@@ -7,9 +7,6 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="Console"/>
-        </Root>
         <Logger name="it.ruczaj" level="DEBUG">
             <AppenderRef ref="Console"/>
         </Logger>

@@ -36,10 +36,11 @@ public class SubstringCheckerImpl implements SubstringChecker {
 	private boolean validateSubstringWithDifferentLength(Character[] translatedCharacters, char[] inputCharacters) {
 		for (int currentIndex = 0; currentIndex < inputCharacters.length; currentIndex++) {
 			char currentCharacter = inputCharacters[currentIndex];
-			logger.debug("Checking: {}", currentCharacter);
 			Character translatedCharacter = translatedCharacters[0];
+			logger.debug("Checking: [{}] against [{}]", currentCharacter, translatedCharacter);
+
 			if (isSameCharacter(translatedCharacter, currentCharacter)) {
-				logger.debug("Matched: {}", currentCharacter);
+				logger.debug("Matched: [{}] against [{}]", currentCharacter, translatedCharacter);
 				if (allSubsequentCharactersAreMatching(inputCharacters, translatedCharacters, currentIndex)) {
 					return true;
 				}
@@ -57,9 +58,10 @@ public class SubstringCheckerImpl implements SubstringChecker {
 				char subsequentCharacter = inputCharacters[currentIndex + subsequentIndex];
 				Character translatedCharacter = translatedCharacters[subsequentIndex];
 				if (isNotSameCharacter(translatedCharacter, subsequentCharacter)) {
+					logger.debug("Not matched subsequent: [{}] against [{}]", subsequentCharacter, translatedCharacter);
 					return false;
 				}
-				logger.debug("Matched subsequent: {}", subsequentCharacter);
+				logger.debug("Matched subsequent: [{}] against [{}]", subsequentCharacter, translatedCharacter);
 			}
 			return true;
 		}

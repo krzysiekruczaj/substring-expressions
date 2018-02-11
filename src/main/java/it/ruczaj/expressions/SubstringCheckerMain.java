@@ -3,6 +3,8 @@ package it.ruczaj.expressions;
 import it.ruczaj.expressions.characters.Character;
 import it.ruczaj.expressions.substring.SubstringChecker;
 import it.ruczaj.expressions.substring.SubstringCheckerImpl;
+import it.ruczaj.expressions.translator.ExpressionTranslator;
+import it.ruczaj.expressions.translator.ExpressionTranslatorImpl;
 
 import java.util.List;
 

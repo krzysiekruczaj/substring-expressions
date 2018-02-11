@@ -9,14 +9,4 @@ public class AnyCharacter implements Character {
 	public boolean isEqual(char character) {
 		return true;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
 }

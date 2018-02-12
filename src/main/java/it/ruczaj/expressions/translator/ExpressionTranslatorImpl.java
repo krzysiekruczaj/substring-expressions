@@ -8,6 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpressionTranslatorImpl implements ExpressionTranslator {
+	/**
+	 * Translates input into character wrappers using following logic:
+	 * <ul>
+	 *     <li>Each occurrence of * in the input means that it can be a match for zero or more characters of the first string.</li>
+	 *     <li>Asterisk (*) may be considered as a regular character, if it is preceded by a backslash (\).</li>
+	 *     <li>Backslash (\) is considered as a regular character in all cases other than preceding the asterisk (*).</li>
+	 * </ul>
+	 *
+	 * @param input string that will be translated
+	 * @return list of translated characters. Length of list can be different than length of input string.
+	 */
 	@Override
 	public List<Character> translate(String input) {
 		char[] inputCharacters = input.toCharArray();
